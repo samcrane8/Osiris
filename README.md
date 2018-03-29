@@ -1,5 +1,7 @@
 # Osiris
-This is a django and nginx-rtmp server that allows n video streams to be analyzed by any given computer vision algorithm and then served to m clients, in a horizontally scaleable format.
+This is server that allows n video streams to be analyzed by any given computer vision algorithm and then served to m clients, in a horizontally scaleable format.
+
+There are two major servers running to make this system work: one built with Flask, and the other is a configuration of Nginx using nginx-rtmp-server to handle streamed data.
 
 # Database
 
