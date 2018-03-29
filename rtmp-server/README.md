@@ -14,6 +14,10 @@ This will be detail how to setup a RTMP server that can manage the broadcaster a
 
 ### Install Dependencies
 
+	First, install make.
+
+	'sudo apt-get install make'
+
 	Here, inside the rtmp-server, is a Makefile that works for Ubuntu linux. First, install all the dependencies:
 
 	`sudo make configure-rtmp-server'
