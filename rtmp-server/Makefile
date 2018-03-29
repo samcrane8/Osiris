@@ -20,3 +20,9 @@ test-config:
 
 start-server:
 	/usr/local/nginx/sbin/nginx
+
+reload-config:
+	/usr/local/nginx/sbin/nginx -t && nginx -s reload
+
+stop-server:
+	/usr/local/nginx/sbin/nginx -s stop
