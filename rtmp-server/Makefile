@@ -17,3 +17,6 @@ update-config-file:
 
 test-config:
 	/usr/local/nginx/sbin/nginx -t
+
+start-server:
+	/usr/local/nginx/sbin/nginx
