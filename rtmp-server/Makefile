@@ -7,9 +7,7 @@ download-rtmp-server:
 	wget http://nginx.org/download/nginx-1.13.1.tar.gz
 	tar -xf nginx-1.13.1.tar.gz
 	cd nginx-1.13.1/
-
-configure-rtmp-server:
-	sudo ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+	sudo nginx-1.13.1/configure --with-http_ssl_module --add-module=../nginx-rtmp-module
 	make -j 1
 	sudo make install
 	export PATH=$PATH:/usr/local/nginx/sbin
