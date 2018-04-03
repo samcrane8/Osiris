@@ -4,7 +4,8 @@ from flask import request
 
 from flaskapp import app, db
 
-from API.V_1_0.User import User
+from API.V1_0.User import User as V1_0_User
+from API.V1_0.Stream import Stream as V1_0_Stream
 
 
 #db.drop_all()

@@ -5,25 +5,10 @@ from Utility.color_print import ColorPrint
 from flaskapp import db, app
 from flask import request, Response, send_file, send_from_directory, make_response, session
 from sqlalchemy.dialects.postgresql import JSON
-from DBModel.User_DBModel import User_DBModel
+from Model.User_Model import User_Model
 import datetime
 
-encryptor = Encryptor()
-seconds_in_hour = 60*60
-session_inactivity_timeout = datetime.timedelta(0, seconds_in_hour * 2)
-
 class User():
-
-	@staticmethod
-	def is_government_official():
-		if 'user' in session.keys():
-			user = session['user']
-			if User_DBModel.query.filter_by(id = user["id"]).first().account_type == "government_official":
-				return make_response(str(True))
-			else:
-				return make_response(str(False))
-		else:
-			return make_response(str(False))
 
 	@staticmethod
 	def isLoggedIn():
@@ -36,7 +21,7 @@ class User():
 		email = parsed_json["email"]
 		password = parsed_json["password"]
 
-		user_info = User_DBModel.authenticate_email_password(email, password)
+		user_info = User_Model.authenticate_email_password(email, password)
 		if user_info is not None:
 			#then this data is good, and we're in.
 
@@ -75,8 +60,8 @@ class User():
 	def list_all_users():
 		if 'user' in session.keys():
 			user = session['user']
-			if User_DBModel.query.filter_by(id = user["id"]).first().account_type == "admin":
-				db_user_devices = User_DBModel.query.all()
+			if User_Model.query.filter_by(id = user["id"]).first().account_type == "admin":
+				db_user_devices = User_Model.query.all()
 				return_json_list = []
 				for report in db_user_devices:
 					dict_local = {'id': report.id,
@@ -104,11 +89,11 @@ class User():
 		email = parsed_json["email"]
 		password = parsed_json["password"]
 		name = parsed_json["name"]
-		account_type = parsed_json["account_type"]
+		account_type = 'customer'
 
-		if User_DBModel.query.filter_by(email = email).first() is None:
+		if User_Model.query.filter_by(email = email).first() is None:
 			id = str(uuid.uuid4())
-			user = User_DBModel(id, name, password, email, account_type)
+			user = User_Model(id, name, password, email, account_type)
 			db.session.add(user)
 			db.session.commit()
 
@@ -125,7 +110,7 @@ class User():
 		if 'user' in session.keys():
 			user = session['user']
 			parsed_json = request.get_json()
-			user_info = User_DBModel.query.filter_by(id = user["id"]).first()
+			user_info = User_Model.query.filter_by(id = user["id"]).first()
 
 			if 'email' in parsed_json:
 				user_info.email = parsed_json['email']
@@ -148,7 +133,7 @@ class User():
 	def get_user_info():
 		if 'user' in session.keys():
 			user = session['user']
-			user_info = User_DBModel.query.filter_by(id = user["id"]).first()
+			user_info = User_Model.query.filter_by(id = user["id"]).first()
 
 			return_dict = {
 				'email': user_info.email,
@@ -164,11 +149,10 @@ class User():
 			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
 			return return_string
 
-app.add_url_rule('/isLoggedIn', 'isLoggedIn', User.isLoggedIn, methods=['GET'])
-app.add_url_rule('/is_government_official', 'is_government_official', User.is_government_official, methods=['GET'])
-app.add_url_rule('/login', 'login', User.login, methods=['POST'])
-app.add_url_rule('/logoff', 'logoff', User.logoff, methods=['GET'])
-app.add_url_rule('/list_all_users', 'list_all_users', User.list_all_users, methods=['GET'])
-app.add_url_rule('/register_user', 'register_user', User.register_user, methods=['POST'])
-app.add_url_rule('/get_user_info', 'get_user_info', User.get_user_info, methods=['GET'])
-app.add_url_rule('/update_user_info', 'update_user_info', User.update_user_info, methods=['POST'])
+app.add_url_rule('/v1_0/isLoggedIn', '/v1_0/isLoggedIn', User.isLoggedIn, methods=['GET'])
+app.add_url_rule('/v1_0/login', '/v1_0/login', User.login, methods=['POST'])
+app.add_url_rule('/v1_0/logoff', '/v1_0/logoff', User.logoff, methods=['GET'])
+app.add_url_rule('/v1_0/list_all_users', '/v1_0/list_all_users', User.list_all_users, methods=['GET'])
+app.add_url_rule('/v1_0/register_user', '/v1_0/register_user', User.register_user, methods=['POST'])
+app.add_url_rule('/v1_0/get_user_info', '/v1_0/get_user_info', User.get_user_info, methods=['GET'])
+app.add_url_rule('/v1_0/update_user_info', '/v1_0/update_user_info', User.update_user_info, methods=['POST'])

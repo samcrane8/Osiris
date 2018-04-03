@@ -26,3 +26,5 @@ This will be detail how to setup a RTMP server that can manage the broadcaster a
 ### Helpful Blogs
 
 	https://docs.peer5.com/guides/setting-up-hls-live-streaming-server-using-nginx/
+
+	https://benwilber.github.io/streamboat.tv/nginx/rtmp/streaming/2016/10/22/implementing-stream-keys-with-nginx-rtmp-and-django.html

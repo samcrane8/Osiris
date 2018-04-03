@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "abdb548c-3190-468d-91de-86acc55c8441",
+		"name": "Osiris",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Stream",
+			"description": null,
+			"item": [
+				{
+					"name": "On Publish",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"1293012utjlfdkaj3r92\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/on_publish",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"on_publish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic MTpsYXdyZW5jZQ=="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"samcrane8@gmail.com\",\n  \"password\" : \"lawrence\",\n  \"name\" : \"Sam\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v1_0/register_user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1_0",
+								"register_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Info",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic MTpsYXdyZW5jZQ=="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sam Crane\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/update_user_info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"update_user_info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"samcrane8@gmail.com\",\n  \"password\" : \"lawrence\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v1_0/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1_0",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "]"
+						},
+						"url": {
+							"raw": "{{url}}/list_all_users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"list_all_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "]"
+						},
+						"url": {
+							"raw": "{{url}}/get_user_info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"get_user_info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logoff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/v1_0/logoff",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1_0",
+								"logoff"
+							]
+						},
+						"description": "This forces the session to end."
+					},
+					"response": []
+				},
+				{
+					"name": "Is Logged In",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/v1_0/isLoggedIn",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1_0",
+								"isLoggedIn"
+							]
+						},
+						"description": "This forces the session to end."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device",
+			"description": "",
+			"item": []
+		}
+	]
+}
