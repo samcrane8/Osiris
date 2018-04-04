@@ -10,7 +10,7 @@ class Stream_Model(db.Model):
     __tablename__ = 'streams'
     id = db.Column(db.Text, primary_key=True)
     device = db.Column(db.Text, db.ForeignKey("devices.id"))
-    live_at = db.Column(db.Text)
+    live_at = db.Column(db.DateTime)
 
     def __init__(self, id, device, live_at):
         self.id = id

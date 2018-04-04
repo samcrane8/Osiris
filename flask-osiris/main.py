@@ -6,6 +6,7 @@ from flaskapp import app, db
 
 from API.V1_0.User import User as V1_0_User
 from API.V1_0.Stream import Stream as V1_0_Stream
+from API.V1_0.Device import Device as V1_0_Device
 
 
 #db.drop_all()

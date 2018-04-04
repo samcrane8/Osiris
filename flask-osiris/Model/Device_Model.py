@@ -13,9 +13,10 @@ class Device_Model(db.Model):
     location = db.Column(db.JSON)
     is_active = db.Column(db.Boolean, default=True)
 
-    def __init__(self, id, user):
+    def __init__(self, id, owner, location):
         self.id = id
-        self.user = user
+        self.owner = owner
+        self.location = location
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
