@@ -12,10 +12,9 @@ class Stream_Model(db.Model):
     device = db.Column(db.Text, db.ForeignKey("devices.id"))
     live_at = db.Column(db.DateTime)
 
-    def __init__(self, id, device, live_at):
+    def __init__(self, id, device):
         self.id = id
-        self.user = user
-        self.live_at = live_at
+        self.device = device
 
     def __repr__(self):
         return '<id {}>'.format(self.id)

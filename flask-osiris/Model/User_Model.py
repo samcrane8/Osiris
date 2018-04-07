@@ -10,9 +10,11 @@ class User_Model(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Text, primary_key=True)
     email = db.Column(db.Text)
+    salt = db.Column(db.Text)
     name = db.Column(db.Text)
     password = db.Column(db.Text)
     account_type = db.Column(db.Text)
+    created_at = db.Column(db.Time)
 
     def __init__(self, id, name, password, email, account_type):
         self.id = id

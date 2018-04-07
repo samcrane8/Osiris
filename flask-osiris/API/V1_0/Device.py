@@ -33,7 +33,7 @@ class Device():
 		else:
 			dict_local = {'message': "Auth error."}
 			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
-			return Response(return_string, status=500, mimetype='application/json')
+			return Response(return_string, status=400, mimetype='application/json')
 
 	@staticmethod
 	def delete_device():
@@ -73,7 +73,7 @@ class Device():
 			if len(devices) == 0:
 				dict_local = {'message': "Bad drone id."}
 				return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
-				return Response(return_string, status=500, mimetype='application/json')
+				return Response(return_string, status=400, mimetype='application/json')
 
 
 			array_local = []
@@ -90,7 +90,7 @@ class Device():
 		else:
 			dict_local = {'message': "Auth error."}
 			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
-			return Response(return_string, status=500, mimetype='application/json')
+			return Response(return_string, status=400, mimetype='application/json')
 
 
 app.add_url_rule('/v1_0/register_device', '/v1_0/register_device', Device.register_device, methods=['POST'])
