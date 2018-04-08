@@ -70,11 +70,6 @@ class Device():
 			id = user['id']
 
 			devices = Device_Model.query.filter_by(owner=id).all()
-			if len(devices) == 0:
-				dict_local = {'message': "Bad drone id."}
-				return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
-				return Response(return_string, status=400, mimetype='application/json')
-
 
 			array_local = []
 
@@ -85,7 +80,7 @@ class Device():
 				array_local += [dict_local]
 
 			
-			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
+			return_string = json.dumps(array_local, sort_keys=True, indent=4, separators=(',', ': '))
 			return return_string
 		else:
 			dict_local = {'message': "Auth error."}
