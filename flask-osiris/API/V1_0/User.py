@@ -99,8 +99,9 @@ class User():
 		parsed_json = request.get_json()
 		email = parsed_json["email"]
 		password = parsed_json["password"]
+		password = str(hashlib.sha256(password.encode()).hexdigest())
 		name = parsed_json["name"]
-		account_type = 'customer'
+		account_type = 'operator'
 
 		if User_Model.query.filter_by(email = email).first() is None:
 			id = str(uuid.uuid4())
@@ -112,9 +113,10 @@ class User():
 			return_string = json.dumps(return_json, sort_keys=True, indent=4, separators=(',', ': '))
 			return return_string
 		else:
-			return_json = {'code': 31, 'message': 'Email already taken.'}
-			return_string = json.dumps(return_json, sort_keys=True, indent=4, separators=(',', ': '))
-			return return_string
+			dict_local = {'message': "Email already taken."}
+			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
+			return Response(return_string, status=400, mimetype='application/json')
+
 
 	@staticmethod
 	def update_user_info():
