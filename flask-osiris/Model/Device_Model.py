@@ -14,10 +14,11 @@ class Device_Model(db.Model):
     stream_url = db.Column(db.Text, default="")
     is_active = db.Column(db.Boolean, default=True)
 
-    def __init__(self, id, owner, location):
+    def __init__(self, id, owner, location, stream_url):
         self.id = id
         self.owner = owner
         self.location = location
+        self.stream_url = stream_url
 
     def __repr__(self):
         return '<id {}>'.format(self.id)

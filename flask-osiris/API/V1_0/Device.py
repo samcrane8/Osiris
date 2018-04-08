@@ -21,8 +21,9 @@ class Device():
 			owner = user["id"]
 			id = str(uuid.uuid4())
 			location = parsed_json["location"]
+			stream_url = parsed_json["stream_url"]
 
-			device = Device_Model(id, owner, location)
+			device = Device_Model(id, owner, location, stream_url)
 			db.session.add(device)
 			db.session.commit()
 
