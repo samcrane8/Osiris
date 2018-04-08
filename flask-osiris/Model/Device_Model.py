@@ -11,6 +11,7 @@ class Device_Model(db.Model):
     id = db.Column(db.Text, primary_key=True)
     owner = db.Column(db.Text, db.ForeignKey("users.id"))
     location = db.Column(db.JSON)
+    stream_url = db.Column(db.Text, default="")
     is_active = db.Column(db.Boolean, default=True)
 
     def __init__(self, id, owner, location):

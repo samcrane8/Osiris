@@ -77,6 +77,8 @@ class Device():
 				dict_local = {}
 				dict_local['id'] = device.id
 				dict_local['location'] = device.location
+				dict_local['stream_url'] = device.stream_url
+
 				array_local += [dict_local]
 
 			
