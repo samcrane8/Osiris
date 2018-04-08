@@ -4,3 +4,4 @@ flask_cors
 flask_session
 psycopg2-binary
 cryptography
+uwsgi

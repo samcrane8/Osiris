@@ -7,6 +7,7 @@ from flask import request, Response, send_file, send_from_directory, make_respon
 from sqlalchemy.dialects.postgresql import JSON
 from Model.User_Model import User_Model
 import datetime
+import hashlib
 
 class User():
 
@@ -18,29 +19,39 @@ class User():
 	def login():
 
 		parsed_json = request.get_json()
+		if "email" not in parsed_json.keys():
+			dict_local = {'message': "No email attribute."}
+			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
+			return Response(return_string, status=400, mimetype='application/json')
 		email = parsed_json["email"]
+
+		if "password" not in parsed_json.keys():
+			dict_local = {'message': "No password attribute."}
+			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
+			return Response(return_string, status=400, mimetype='application/json')
 		password = parsed_json["password"]
+		password = str(hashlib.sha256(password.encode()).hexdigest())
 
 		user_info = User_Model.authenticate_email_password(email, password)
 		if user_info is not None:
 			#then this data is good, and we're in.
 
-			user = {'id': user_info.id, 'email' : email, 'password' : password}
+			user = {'id': user_info.id, 'name': user_info.name, 'email' : email, 'password' : password}
 			
 			if 'user' in session.keys():
-				dict_local = {'code': 200, 'message': "already logged in"}
+				dict_local = {'message': "already logged in"}
 			else:
 				session['user'] = user
 				session.modified=True
-				dict_local = {'code': 200}
+				dict_local = {'message': "Logged in successfully."}
 			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
-			response = make_response(return_string)  
-			return response
+			return Response(return_string, status=200, mimetype='application/json')
 		else:
 			#not a good cookie and no login.
-			dict_local = {'code': 31, 'message': "login failed"}
+			dict_local = {'message': "Password or username is wrong."}
 			return_string = json.dumps(dict_local, sort_keys=True, indent=4, separators=(',', ': '))
-			return return_string
+			return Response(return_string, status=400, mimetype='application/json')
+
 
 	@staticmethod
 	def logoff():
